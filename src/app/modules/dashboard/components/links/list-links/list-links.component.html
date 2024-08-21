@@ -1,0 +1,72 @@
+<div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row">
+
+
+  <hr class="border-dashed border-border">
+
+  <div class="w-full flex flex-col p-2 gap-2">
+    <div class="flex flex-row items-center justify-between w-full">
+      <div class="w-1/2">
+        <div class="flex flex-row gap-2">
+          <div class="w-full">
+            <label class="text-muted-foreground text-sm">Enlaces</label>
+            <input type="text" placeholder="nuevo enlace" class="w-full border border-border rounded-lg p-2">
+          </div>
+
+        </div>
+      </div>
+      <!-- <div class="w-1/2 flex items-center justify-end gap-2 ">
+        <button class=" p-1 text-foreground rounded-md hover:bg-muted"><</button>
+        <button class="p-2 bg-primary text-white rounded-md ">1</button>
+        <button class=" p-2 text-foreground rounded-md  hover:bg-muted ">2</button>
+        <button class=" p-2 text-foreground rounded-md  hover:bg-muted ">3</button>
+        <button class="p-2 text-foreground  rounded-md hover:bg-muted ">...</button>
+        <button class="p-1 text-foreground  rounded-md hover:bg-muted ">></button>
+
+
+
+      </div> -->
+
+    </div>
+
+
+  </div>
+
+  <hr class="border-dashed border-border">
+
+
+
+  <div
+    class="relative overflow-x-auto h-72 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+    <table class="w-full table-auto    ">
+      <!--Table head-->
+      <thead class="text-xs uppercase text-muted-foreground  sticky top-0 bg-background ">
+        <tr>
+          <th class="py-3 text-left">Titulo</th>
+          <th class="py-3 text-left">Subtitulo</th>
+          <th class="py-3 text-right">Status</th>
+        </tr>
+      </thead>
+      <!--end Table head-->
+      <!--Table body-->
+      <tbody>
+        <tr *ngFor="let link of links" [link]="link"  item-list-link
+            (click)="onSelectTable(link)" class="border-b border-dashed border-border hover:bg-card"></tr>
+
+      </tbody>
+      <!--end::Table body-->
+    </table>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

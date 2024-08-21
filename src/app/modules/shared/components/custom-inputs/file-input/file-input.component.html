@@ -1,0 +1,12 @@
+<div class="flex flex-col gap-2" >
+  <img *ngIf="imgBase64" [src]="imgBase64" alt="image" class="image">
+  <div class="wrapper" (click)="onClickInputWrapper()">
+    <header>{{fileName}}</header>
+    <!-- On var image64 show on image -->
+
+    <input (change)="onChangeFile($event)" #inputFile class="file-input" type="file" name="file" hidden>
+    <i class="fas fa-cloud-upload-alt"></i>
+  </div>
+
+
+</div>

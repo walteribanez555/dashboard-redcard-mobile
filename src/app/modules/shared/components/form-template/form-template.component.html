@@ -1,0 +1,11 @@
+<div class="flex w-full flex-col gap-2 bg-background p-3">
+  <label class="text-sm font-semibold text-foreground text-start">{{ data.description || "" }}</label>
+
+  <div class="flex gap-2 flex-col w-full ">
+      <app-field-template  class="w-full"  *ngFor="let field of fields"  [dynamicField]="field" ></app-field-template>
+
+  </div>
+
+
+
+</div>

@@ -1,0 +1,28 @@
+<div class="flex h-screen w-screen">
+  <div class="auth-bg hidden flex-1 items-center justify-center bg-primary bg-cover lg:flex">
+    <div class="max-w-2xl space-y-4 p-8 text-center text-white">
+      <!-- <img src="./assets/images/auth-screens.png" alt="dashboard widget" /> -->
+      <h1 class="text-4xl font-bold">"simple, eficiente y accesible"</h1>
+      <p class="text-xs font-light">
+        gestión de relaciones con clientes (CRM) con inteligencia artificial
+        <span class="cursor-pointer font-medium text-yellow-400">Chatbot CRM.</span> Nuestra aplicación
+        combina diferentes tecnologias para ofrecer un chatbot accesible a todo publico
+        <span class="cursor-pointer font-medium text-yellow-400">una experiencia de usuario comoda </span>
+        y ofrecer contenido necesario para diferentes publicos.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-1 items-center justify-center bg-background">
+    <div class="max-w-md overflow-y-auto px-4 sm:w-[500px]">
+      <!-- logo -->
+      <div class="flex items-center justify-center">
+        <a class="rounded bg-primary p-2">
+          <svg-icon src="assets/icons/logo.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
+        </a>
+        <b class="text-md pl-3 font-bold text-foreground"> CHATBOT CRM </b>
+      </div>
+      <!-- Route -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

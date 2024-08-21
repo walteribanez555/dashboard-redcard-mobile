@@ -1,0 +1,71 @@
+<div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <!--
+    Background backdrop, show/hide based on modal state.
+
+    Entering: "ease-out duration-300"
+      From: "opacity-0"
+      To: "opacity-100"
+    Leaving: "ease-in duration-200"
+      From: "opacity-100"
+      To: "opacity-0"
+  -->
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full  items-end justify-center p-4 text-center sm:items-center sm:p-0 ">
+
+      <div
+        class="relative  w-full max-w-4xl transform overflow-hidden rounded-lg bg-card text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-4xl">
+        <div class="bg-card px-2 pb-2 pt-5 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+
+            <div class="relative w-full  mt-3 text-center sm:ml-4  ">
+              <div class="flex w-full text-start flex-row gap-2 pr-8 items-start justify-start ">
+                <div
+
+                  class="  flex flex-row h-6 w-fit  flex-shrink-0 items-center justify-start rounded-full bg-primary mx-0  ">
+                  <svg-icon [src]="iconPath!" class="h-6 w-6 text-white" alt=""></svg-icon>
+                </div>
+                <h3 class="text-base  leading-6 font-semibold text-foreground  text-bold" id="modal-title">{{title}}</h3>
+                <div (click)="close()" class="absolute cursor-pointer right-0 inline-flex w-fit justify-center rounded-md bg-background px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-inset ring-foreground hover:bg-card sm:mt-0 sm:w-fit">
+                  X
+                </div>
+              </div>
+              <div class="mt-5">
+                <ng-template dcWrapper id="item"></ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" flex   flex-col bg-background gap-2 px-4 py-3 sm:flex md:flex-row-reverse sm:px-6">
+          <ng-content *ngFor="let action of actions">
+            <button *ngIf=" action.action == create && (forms == null  ||  (actualStep == forms.length -1 )) " type="button"
+              class="inline-flex w-full justify-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground  shadow-sm  sm:ml-3 sm:w-auto"
+              (click)="submit(action)">{{action.title}}</button>
+
+            <button *ngIf=" action.action == edit  && (forms == null  ||  (actualStep == forms.length -1 ))" type="button"
+              class="inline-flex w-full justify-center rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-primary-foreground  shadow-sm  sm:ml-3 sm:w-auto"
+              (click)="submit(action)">{{action.title}}</button>
+
+            <button *ngIf="action.action == delete && (forms == null  ||  (actualStep == forms.length -1 ))" type="button"
+              class="inline-flex w-full justify-center rounded-md  bg-red-600 px-3 py-2 text-sm font-semibold text-primary-foreground  shadow-sm  sm:ml-3 sm:w-auto"
+              (click)="submit(action)">{{action.title}}</button>
+          </ng-content>
+          <ng-content *ngIf="forms && forms.length > 0  ">
+            <div *ngIf="forms.length > 1" class="flex flex-col-reverse w-full md:flex-row md:w-fit items-center justify-center  gap-1 px-1 ">
+              <button (click)="togglePrev()"  class=" inline-flex w-full justify-center rounded-md bg-background px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-inset ring-foreground hover:bg-card sm:mt-0 sm:w-auto ">
+                Paso Previo
+              </button>
+              <button *ngIf=" !(actualStep == forms.length -1 )"  (click)="toggleNext()" class="inline-flex w-full justify-center rounded-md bg-background px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-inset ring-foreground hover:bg-card sm:mt-0 sm:w-auto ">
+                Siguiente Paso
+              </button>
+            </div>
+          </ng-content>
+          <button type="button"
+            class=" inline-flex w-full justify-center rounded-md bg-background px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-inset ring-foreground hover:bg-card sm:mt-0 sm:w-auto"
+            (click)="close()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

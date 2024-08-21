@@ -1,0 +1,32 @@
+<div class="flex flex-col relative" >
+  <div class="flex items-start hover:bg-card p-2  border-muted rounded-md relative"
+  [ngClass]="
+  isHidden
+  ? 'border  '
+  : ' border-2 border-primary '"
+
+  (click)="updateToggle()">
+    <span class="text-sm text-foreground "  >{{searchInput}}</span>
+
+    <svg-icon src="assets/icons/heroicons/outline/bars-arrow-down.svg" [svgClass]="'h-6 w-6 absolute right-2 text-foreground'"> </svg-icon>
+    <!-- <i class="uil uil-angle-down"></i> -->
+  </div>
+
+  <ng-container *ngIf="isToggle">
+    <div class="content">
+      <!-- <div  *ngIf="withFilter" class="search">
+        <i class="uil uil-search"></i>
+        <input  spellcheck="false" type="text" placeholder="Search"
+          (input)="searchTerm($event)" [(ngModel)]="searchText">
+      </div> -->
+      <!-- <app-listview [items]="data.countries" [isHidden]="true" [onSelectItem]="onSelectItem" [filterListener]="searchTerm$">
+      </app-listview> -->
+      <app-listview    [items]="items"    [isHidden]="isHidden" [onSelectItem]="onSelectItem" [filterListener]="searchTerm$">
+      </app-listview>
+    </div>
+
+
+  </ng-container>
+
+
+</div>

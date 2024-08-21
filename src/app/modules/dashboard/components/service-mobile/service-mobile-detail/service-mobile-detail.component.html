@@ -1,0 +1,78 @@
+<form *ngIf="formDetails"   [formGroup]="formDetails" (ngSubmit)="onSubmit()"
+  class="flex   w-screen  md:w-96 bg-background h-full overflow-auto gap-2  px-3 flex-col scrollbar-thumb-rounded scrollbar-track-rounded grow  scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+  <div class="sticky z-10 top-0 flex flex-col bg-background  ">
+    <div class=" flex  relative flex-row items-center gap-2 py-3 justify-start">
+      <span class="text-lg text-foreground">{{'Detalles del Plan'}}</span>
+
+      <button (click)="close()"
+        class="absolute cursor-pointer right-0 inline-flex w-fit justify-center rounded-md bg-background px-3 py-2 text-sm font-semibold text-foreground shadow-sm ring-1 ring-inset ring-foreground hover:bg-card sm:mt-0 sm:w-fit">
+        X
+      </button>
+    </div>
+    <hr class="border-dashed border-border">
+  </div>
+  <div class="flex py-2 flex-col">
+    <div class="px-2 flex-col flex">
+
+
+
+    </div>
+
+
+    <div class="flex py-2 flex-col">
+      <div class="px-2 flex-col flex gap-2">
+        <span class="text-xs text-muted-foreground">Plan</span>
+        <app-select  formControlName="plan"  [items]="data.items"  ></app-select>
+
+      </div>
+    </div>
+    <hr class="border-dashed border-border">
+
+    <div class="flex py-2 flex-col">
+      <div class="px-2 flex-col flex gap-2">
+        <span class="text-xs text-muted-foreground">Descripcion</span>
+        <input formControlName="description" type="text" placeholder="Enlace general con detalles precisos">
+      </div>
+    </div>
+    <hr class="border-dashed border-border">
+
+
+
+    <div class="flex py-2 flex-col">
+      <div class="px-2 flex-col flex gap-2">
+        <span class="text-xs text-muted-foreground">Estado</span>
+        <app-select  formControlName="status"  [items]="items"  ></app-select>
+      </div>
+    </div>
+
+    <hr class="border-dashed border-border">
+
+    <div class="flex py-2 flex-col">
+      <div class="px-2 flex-col flex gap-2">
+        <span class="text-xs text-muted-foreground">Imagen</span>
+        <app-file-input formControlName="image"></app-file-input>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <hr class="border-dashed border-border">
+    <div class="flex py-2 flex-col gap-2 ">
+      <button type="submit" class="bg-primary text-white rounded-md p-2">
+        Guardar Cambios
+      </button>
+
+
+    </div>
+
+
+
+
+
+
+  </div>

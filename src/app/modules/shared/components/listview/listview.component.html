@@ -1,0 +1,8 @@
+<div [ngClass]="
+    isHidden
+    ? ' hidden'
+    : ' mt-2 absolute z-10 bg-background shadow-lg rounded-md w-full border border-muted max-h-32 overflow-auto scrollbar-thumb-rounded scrollbar-track-rounded grow  scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted'
+
+" >
+  <app-item-list *ngFor="let item of filteredItems" [name]="item.name" [id]="item.id" (click)="onSelect(item)"></app-item-list>
+</div>

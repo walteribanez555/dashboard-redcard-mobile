@@ -9,11 +9,9 @@ on:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_S3_BUCKET : ${{ secrets.AWS_S3_BUCKET }}
-  AWS_REGION : 'us-east-1'
-  SOURCE_DIR : './www'
-
-
+  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+  AWS_REGION: 'us-east-1'
+  SOURCE_DIR: './www'
 
 jobs:
   build-infra:
@@ -25,4 +23,4 @@ jobs:
       - name: Set up Jarvis
         uses: jakejarvis/s3-sync-action@master
         with:
-            args: --acl public-read --follow-symlinks --delete
+          args: --follow-symlinks --delete

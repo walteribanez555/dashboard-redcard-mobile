@@ -71,6 +71,44 @@ export class ServiceMobileComponent {
       this.dcWrapper.viewContainerRef.clear();
       this.onShowItem = false;
     },
+
+    delete: ( id ) => {
+      this.dcWrapper.viewContainerRef.clear();
+      this.onShowItem = false;
+
+      const index = this.listServicesUi.findIndex( service => service.service_id === id || service.id === id);
+
+
+      const urlImg = this.listServicesUi[index].img_url;
+
+      const fileName = urlImg.substring(urlImg.lastIndexOf('/') + 1);
+
+      console.log({fileName});
+
+      // this.s3Service.getObject(fileName)?.then((resp => {
+      //   console.log({resp});
+      // }))
+
+      this.s3Service.deleteObject(fileName)?.then((resp => {
+        this.services.deleteService(id).subscribe({
+          next : ( resp ) => {
+            console.log({resp});
+          },
+          error : ( err ) => {
+            console.log({err});
+          },
+          complete: ( ) => {
+          }
+
+        })
+
+
+
+      }))
+
+
+
+    }
   }
 
 
@@ -221,10 +259,11 @@ export class ServiceMobileComponent {
         const { Plan, Descripcion, Imagen,Destinos} = formResponse;
 
         const uniqueId = Math.floor(Math.random() * 1000);
-        const fileName = `${uniqueId}-${Imagen.name}`;
+        const type = Imagen.name.split('.');
+        const fileName = `${uniqueId}-${Plan}`;
 
-
-        this.s3Service.createItem(Imagen, fileName)!.then( (url) => {
+        const fileExtension = type[type.length - 1];
+        this.s3Service.createItem(Imagen, fileName+'.'+fileExtension)!.then( (url) => {
           const newService : Service = {
             servicio_id : Plan,
             description : Descripcion,
@@ -241,9 +280,12 @@ export class ServiceMobileComponent {
                 service : this.listServiceCRM.filter( service => service.servicio_id === resp.servicio_id)[0],
                 status : this.states.find( status => status.id === resp.status) || {id : 0, title : ''} as any
               })
+
+              this.s3Service.deleteObject(fileName+'.'+fileExtension);
+
             },
             error : ( err ) => {
-              this.s3Service.deleteObject(Imagen.name);
+              this.s3Service.deleteObject(fileName+'.'+fileExtension);
 
             },
             complete: ( ) => {

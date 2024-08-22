@@ -18,7 +18,7 @@ export class LinkService {
   // url : string,
   // status : number,
 
-  apiMobile = environment.apiMobile+'/links';
+  apiMobile = environment.apiMobile+'links';
   private http = inject(HttpClient);
 
   // mockData : Link[] = [
@@ -71,12 +71,12 @@ export class LinkService {
   }
 
   updateLink(link : Link)  {
-    return this.http.put<Link>(`${this.apiMobile}/${link.id}`, link);
+    return this.http.put<Link>(`${this.apiMobile}?id=${link.id}`, link);
 
   }
 
   deleteLink(id : number) {
-    return this.http.delete<Link>(`${this.apiMobile}/${id}`);
+    return this.http.delete(`${this.apiMobile}?id=${id}`);
     // return new Observable<Link>(observer => {
     //   let index = this.mockData.findIndex(link => link.id === id);
     //   let link = this.mockData[index];

@@ -64,10 +64,88 @@ export class LinksComponent implements OnInit {
       console.log({value :  form.value});
       this.dcWrapper.viewContainerRef.clear();
       this.onShowItem = false;
+
+      console.log({details : form});
+
+      const { id, status, title, subtitle, url  } = form.value;
+
+      const newLink : Link = {
+        id,
+        status,
+        title,
+        subtitle,
+        url,
+      }
+
+      this.linkService.updateLink(newLink).subscribe({
+        next : ( resp ) => {
+
+          const status = this.states.find( status => status.id === newLink.status) || {id : 0, title : ''} as State ;
+
+
+          const link: LinkUI = {
+            link_id : id,
+            id,
+            status: status, // Convert number to State
+            title,
+            subtitle,
+            url,
+          };
+
+          //Update local list with that details
+          const itemIndex = this.links.findIndex(item => item.link_id === newLink.id);
+          if (itemIndex !== -1) {
+            this.links[itemIndex] = link;
+          }
+
+          console.log({item : this.links[itemIndex]});
+
+        },
+        error : ( err ) => {
+          console.log({err});
+        },
+
+
+
+        complete : ( ) => {
+        },
+
+
+
+      })
+
+
+
+
+
     },
     cancel: () => {
       this.dcWrapper.viewContainerRef.clear();
       this.onShowItem = false;
+    },
+
+    delete: (id : number) => {
+
+      this.dcWrapper.viewContainerRef.clear();
+      this.onShowItem = false;
+
+      this.linkService.deleteLink(id).subscribe({
+        next : ( item ) => {
+          const index = this.links.findIndex(link => link.id   === id || link.link_id === id);
+
+          if (index !== -1) {
+            this.links.splice(index, 1);
+          }
+        },
+        error : ( err ) => {
+
+        },
+        complete : ( ) => {
+
+        }
+      })
+
+
     },
 
   }

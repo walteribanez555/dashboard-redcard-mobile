@@ -24,6 +24,7 @@ export class LinkDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.linkForm.setValue({
+      id: this.link.id || this.link.link_id,
       title: this.link.title,
       subtitle: this.link.subtitle,
       url: this.link.url,
@@ -48,6 +49,7 @@ export class LinkDetailComponent implements OnInit {
 
 
   linkForm = new FormGroup({
+    id : new FormControl(),
     title: new FormControl(),
     subtitle: new FormControl(),
     url: new FormControl(),
@@ -61,6 +63,10 @@ export class LinkDetailComponent implements OnInit {
 
   onSubmit() {
     this.detailListener.submit(this.linkForm);
+  }
+
+  delete() {
+    this.detailListener.delete(this.link.link_id || this.link.id!);
   }
 
 

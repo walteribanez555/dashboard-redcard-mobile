@@ -84,4 +84,9 @@ export class ServiceMobileDetailComponent implements OnInit, AfterViewInit {
   onSubmit() {
     this.detailListener.submit(this.formDetails!);
   }
+
+
+  onDelete( ) {
+    this.detailListener.delete(this.service.id || this.service.service_id!);
+  }
 }

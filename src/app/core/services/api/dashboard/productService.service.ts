@@ -74,7 +74,7 @@ export class ProductServiceService {
   }
 
   deleteService(id : number)  {
-    return this.http.delete(`${this.apiMobile}/${id}`);
+    return this.http.delete(`${this.apiMobile}?id=${id}`);
 
   }
 

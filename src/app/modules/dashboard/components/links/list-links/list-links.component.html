@@ -36,7 +36,7 @@
 
 
   <div
-    class="relative overflow-x-auto h-72 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+    class="relative overflow-x-auto p-2 h-72 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
     <table class="w-full table-auto    ">
       <!--Table head-->
       <thead class="text-xs uppercase text-muted-foreground  sticky top-0 bg-background ">
@@ -55,6 +55,10 @@
       </tbody>
       <!--end::Table body-->
     </table>
+
+    <div *ngIf="isLoading" class="absolute inset-0 flex items-center justify-center bg-slate-800 bg-opacity-50">
+      <svg-icon src="assets/icons/loading.svg" svgClass="h-12 w-12 text-primary"></svg-icon>
+    </div>
   </div>
 
 

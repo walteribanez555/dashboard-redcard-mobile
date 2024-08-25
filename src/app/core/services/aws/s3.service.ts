@@ -10,6 +10,7 @@ import {
   GetObjectCommand,
 } from '@aws-sdk/client-s3';
 import { environment } from '../../../../environments/environment';
+import { from, map, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,9 +35,9 @@ export class S3Service {
 
   }
 
-  async createItem(file: File, fileName: string) {
-    if(!this.s3Client) {
-      return;
+  createItem(file: File, fileName: string): Observable<string> {
+    if (!this.s3Client) {
+      return of();
     }
 
     const command = new PutObjectCommand({
@@ -45,15 +46,15 @@ export class S3Service {
       Body: file,
       // ACL : 'public-read',
     });
-    await this.s3Client!.send(command);
 
-    return `https://${this.bucketS3}.s3.amazonaws.com/${fileName}`;
-
+    return from(this.s3Client!.send(command)).pipe(
+      map(() => `https://${this.bucketS3}.s3.amazonaws.com/${fileName}`)
+    );
   }
 
-  async putObject(bucket: string, key: string, body: any) {
+  putObject(bucket: string, key: string, body: any) {
     if(!this.s3Client) {
-      return;
+      return of(null);
     }
 
     const command = new PutObjectCommand({
@@ -62,13 +63,16 @@ export class S3Service {
       Body: body,
     });
 
-    await this.s3Client!.send(command);
-    return `https://${this.bucketS3}.s3.amazonaws.com/${key}`;
+
+    return from(this.s3Client!.send(command)).pipe(
+      map(() => `https://${this.bucketS3}.s3.amazonaws.com/${key}`)
+    );
+
   }
 
   deleteObject( key: string) {
     if(!this.s3Client) {
-      return;
+      return of(null);
     }
 
     const command = new DeleteObjectCommand({
@@ -76,7 +80,9 @@ export class S3Service {
       Key: key,
     });
 
-    return this.s3Client!.send(command);
+    return from(this.s3Client!.send(command)).pipe(
+      map(() => `https://${this.bucketS3}.s3.amazonaws.com/${key}`)
+    );
   }
 
   getObject( key: string) {

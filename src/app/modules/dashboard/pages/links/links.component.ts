@@ -33,6 +33,7 @@ import { responseModalFormMapper } from '../../../shared/utils/mappers/response-
 })
 export class LinksComponent implements OnInit {
   ngOnInit(): void {
+    this.onLoadingItems = true;
     this.linkService.getLinks().subscribe({
       next : ( resp ) => {
 
@@ -44,6 +45,8 @@ export class LinksComponent implements OnInit {
             status
           }
         })];
+
+        this.onLoadingItems = false;
       },
       error : ( err ) => {
 
@@ -156,6 +159,8 @@ export class LinksComponent implements OnInit {
   onShowItem : boolean = false;
   private linkService = inject(LinkService);
   private modalService  = inject(ModalService);
+
+  onLoadingItems : boolean = false;
 
 
   links : LinkUI[] = [];

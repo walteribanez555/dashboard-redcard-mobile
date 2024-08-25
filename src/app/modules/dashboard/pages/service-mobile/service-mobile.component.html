@@ -9,7 +9,7 @@
   ' flex-col px-4  sm:px-8 overflow-auto scrollbar-thumb-rounded scrollbar-track-rounded grow  scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted py-4'
   ">
     <app-service-mobile-header (onAddServiceToggle)="onAddService()" ></app-service-mobile-header>
-    <app-list-service-mobile [listServices]="listServicesUi"  (onSelectService)="onDetailService($event)" ></app-list-service-mobile>
+    <app-list-service-mobile  [isLoading]="isLoadingListItems" [listServices]="listServicesUi"  (onSelectService)="onDetailService($event)" ></app-list-service-mobile>
 
 
   </div>
@@ -17,3 +17,8 @@
 
   <ng-template dcWrapper></ng-template>
 </div>
+
+
+<!-- <app-dialog></app-dialog> -->
+
+

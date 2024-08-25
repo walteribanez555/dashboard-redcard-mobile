@@ -1,0 +1,37 @@
+/* .dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+} */
+
+/* Agregar el dialog para usar con tailwind estos elementos flex h-full items-start justify-end p-4 text-center */
+.dialog {
+  @apply absolute z-20 bg-background transform overflow-hidden rounded-lg  items-center shadow-xl transition-all;
+}
+
+
+.dialog-top {
+  @apply top-3;
+}
+
+.dialog-center{
+   @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}
+
+.dialog-bottom {
+  @apply bottom-3;
+}
+
+.dialog-left {
+  @apply left-3;
+}
+
+.dialog-right {
+  @apply right-3;
+}
+
+

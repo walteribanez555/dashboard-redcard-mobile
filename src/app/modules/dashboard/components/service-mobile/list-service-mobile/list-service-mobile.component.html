@@ -36,8 +36,8 @@
 
 
   <div
-    class="relative overflow-x-auto h-72 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
-    <table class="w-full table-auto    ">
+    class="relative overflow-x-auto p-2 h-72 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+    <table class="w-full table-auto   ">
       <!--Table head-->
       <thead class="text-xs uppercase text-muted-foreground  sticky top-0 bg-background ">
         <tr>
@@ -49,12 +49,16 @@
       <!--end Table head-->
       <!--Table body-->
       <tbody>
-        <tr *ngFor="let service of listServices" [serviceItem]="service"  item-list-service-mobile
-            (click)="onSelectItem(service)" class="border-b border-dashed border-border hover:bg-card"></tr>
+        <tr *ngFor="let service of listServices" [serviceItem]="service" item-list-service-mobile
+          (click)="onSelectItem(service)" class="border-b border-dashed border-border hover:bg-card cursor-pointer"></tr>
 
       </tbody>
       <!--end::Table body-->
     </table>
+
+    <div *ngIf="isLoading" class="absolute inset-0 flex items-center justify-center bg-slate-800 bg-opacity-50">
+      <svg-icon src="assets/icons/loading.svg" svgClass="h-12 w-12 text-primary"></svg-icon>
+    </div>
   </div>
 
 

@@ -9,7 +9,7 @@
   ' flex-col px-4  sm:px-8 overflow-auto scrollbar-thumb-rounded scrollbar-track-rounded grow  scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted py-4'
   ">
   <app-links-header  (onAddLinkToggle)="onAddLink()" ></app-links-header>
-  <app-list-links [links]="links"  (onSelectLink)="onDetailLink($event)" ></app-list-links>
+  <app-list-links [isLoading]="onLoadingItems" [links]="links"  (onSelectLink)="onDetailLink($event)" ></app-list-links>
 
 
 

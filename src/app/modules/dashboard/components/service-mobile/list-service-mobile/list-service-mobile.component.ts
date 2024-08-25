@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { ItemListServiceMobileComponent } from '../item-list-service-mobile/item-list-service-mobile.component';
 import { Service } from '../../../models/service.model';
 import { ServiceUI } from '../../../models/ui/service-ui.model';
+import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-list-service-mobile',
@@ -10,6 +11,7 @@ import { ServiceUI } from '../../../models/ui/service-ui.model';
   imports: [
     CommonModule,
     ItemListServiceMobileComponent,
+    SvgIconComponent,
   ],
   templateUrl : './list-service-mobile.component.html',
 
@@ -17,6 +19,7 @@ import { ServiceUI } from '../../../models/ui/service-ui.model';
 export class ListServiceMobileComponent {
 
   @Input() listServices : ServiceUI[] = [];
+  @Input() isLoading : boolean = true;
 
   @Output() onSelectService = new EventEmitter();
 

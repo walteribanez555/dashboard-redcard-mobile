@@ -4,6 +4,7 @@ import { Link } from '../../../models/link.model';
 import { ItemListLinkComponent } from '../item-list-link/item-list-link.component';
 import { Status } from '../../../../../core/constants/status';
 import { LinkUI } from '../../../models/ui/link-ui.model';
+import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-list-links',
@@ -11,6 +12,7 @@ import { LinkUI } from '../../../models/ui/link-ui.model';
   imports: [
     CommonModule,
     ItemListLinkComponent,
+    SvgIconComponent
   ],
   templateUrl : './list-links.component.html',
 })
@@ -19,6 +21,7 @@ export class ListLinksComponent {
   @Input() links : LinkUI[] = [];
   @Input() states : Status[] = [];
   @Output() onSelectLink = new EventEmitter();
+  @Input() isLoading = true;
 
 
   onSelectTable(item : LinkUI) {

@@ -43,6 +43,7 @@ export class ServiceMobileDetailComponent implements OnInit, AfterViewInit {
       (img) => {
 
          this.formDetails = new FormGroup({
+          id: new FormControl(this.service.service_id || this.service.id!),
           plan: new FormControl(this.service.service.servicio_id),
           description: new FormControl(this.service.description),
           image: new FormControl(img),

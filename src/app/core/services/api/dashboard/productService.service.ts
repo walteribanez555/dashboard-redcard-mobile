@@ -1,6 +1,6 @@
 
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { Service } from '../../../../modules/dashboard/models/service.model';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -70,7 +70,9 @@ export class ProductServiceService {
   }
 
   updateService(Service : Service)  {
-    return this.http.put<Service>(this.apiMobile, Service);
+    return this.http.put<Service>(`${this.apiMobile}?id=${Service.id || Service.service_id!}`, Service).pipe(
+      switchMap(() => of(Service))
+    );
   }
 
   deleteService(id : number)  {

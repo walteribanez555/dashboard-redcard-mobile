@@ -1,0 +1,20 @@
+<div [classList]="
+    onShowItem ?
+    'mx-auto flex flex-col md:flex-row  px-0 justify-between md:w-full overflow-auto  h-full ':
+    'mx-auto flex flex-col md:flex-row  px-0 justify-between md:w-full overflow-hidden  h-full '
+  ">
+  <div [classList]="
+  onShowItem ?
+  ' flex-col px-4  sm:px-8 overflow-auto scrollbar-thumb-rounded scrollbar-track-rounded grow  scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted py-0 md:py-4':
+  ' flex-col px-4  sm:px-8 overflow-auto scrollbar-thumb-rounded scrollbar-track-rounded grow  scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted py-4'
+  ">
+    <app-discounts-header (onAdd)="onAddDiscount()" ></app-discounts-header>
+    <app-list-discounts  [discounts]="discounts$()"  (ondiscountSelected)="onDetailDiscount($event)" ></app-list-discounts>
+
+
+
+  </div>
+
+
+  <ng-template dcWrapper></ng-template>
+</div>

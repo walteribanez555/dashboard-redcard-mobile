@@ -1,0 +1,63 @@
+<div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row">
+
+
+  <hr class="border-dashed border-border">
+
+  <div class="w-full flex flex-col p-2 gap-2">
+    <div class="flex flex-row items-center justify-between w-full">
+      <div class="w-1/2">
+        <div class="flex flex-row gap-2">
+          <div class="w-full">
+            <label class="text-muted-foreground text-sm">Descuentos</label>
+            <input type="text" placeholder="cobertura internacional" class="w-full border border-border rounded-lg p-2">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="border-dashed border-border">
+
+
+
+  <div
+    class="relative overflow-x-auto p-2 h-72 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+    <table class="w-full table-auto    ">
+      <!--Table head-->
+      <thead class="text-xs uppercase text-muted-foreground  sticky top-0 bg-background ">
+        <tr>
+          <th class="py-3 text-left">Titulo</th>
+          <th class="py-3 text-left">Monto</th>
+          <th class="py-3 text-left">Tipo</th>
+          <th class="py-3 text-left">Descripcion</th>
+          <th class="py-3 text-right">Archivos</th>
+        </tr>
+      </thead>
+      <!--end Table head-->
+      <!--Table body-->
+      <tbody>
+        <tr *ngFor="let discount of discounts" item-list-discount [discount]="discount"
+            (click)="onSelectTable(discount)" class="border-b border-dashed border-border hover:bg-card"></tr>
+      </tbody>
+      <!--end::Table body-->
+    </table>
+
+    <!-- <div *ngIf="isLoading" class="absolute inset-0 flex items-center justify-center bg-slate-800 bg-opacity-50">
+      <svg-icon src="assets/icons/loading.svg" svgClass="h-12 w-12 text-primary"></svg-icon>
+    </div> -->
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

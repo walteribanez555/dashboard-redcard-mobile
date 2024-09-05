@@ -12,7 +12,7 @@ import { FileRepository } from '../../domain/repositories/file.repository';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiFilesS3Service  implements FileRepository {
+export class ApiFilesS3Service implements FileRepository {
   s3Client: S3Client | null = null;
 
   accessKeyId = environment.s3_key;
@@ -31,8 +31,15 @@ export class ApiFilesS3Service  implements FileRepository {
     console.log('Instanciado correctamente');
   }
 
-  private generateFileKey(file: File, filename : string, timestamp: number): string {
-    return `${filename}.${file.type.split('/')[1]}`;
+  private generateFileKey(
+    file: File,
+    filename: string,
+    timestamp: number,
+    pos : number
+  ): string {
+
+
+    return `${timestamp}${pos}`;
   }
 
   public static getFileKeyFromString(url: string) {
@@ -40,9 +47,9 @@ export class ApiFilesS3Service  implements FileRepository {
     return array[array.length - 1];
   }
 
-  private async uploadFile(file: File, keyname : string) {
+  private async uploadFile(file: File, keyname: string ,pos : number) {
     const timestamp = Date.now();
-    const fileKey = this.generateFileKey(file, keyname, timestamp);
+    const fileKey = this.generateFileKey(file, keyname, timestamp, pos);
 
     if (!this.s3Client) {
       throw 'S3 Client not initialized';
@@ -64,9 +71,11 @@ export class ApiFilesS3Service  implements FileRepository {
 
   async upload(files: UploadFileDto[]): Promise<UploadFileDto[]> {
     try {
+      console.log({files});
+
       const filesUploaded: UploadFileDto[] = await Promise.all(
-        files.map(async (file) => {
-          const url = await this.uploadFile(file.file, file.filename);
+        files.map(async (file, index) => {
+          const url = await this.uploadFile(file.file, file.filename,index);
           const fileUploaded: UploadFileDto = {
             file: file.file,
             filename: url,
@@ -81,7 +90,7 @@ export class ApiFilesS3Service  implements FileRepository {
     }
   }
 
-  async delete(key: string) : Promise<string> {
+  async delete(key: string): Promise<string> {
     if (!this.s3Client) {
       throw 'S3 Client not initialized';
     }
@@ -94,7 +103,8 @@ export class ApiFilesS3Service  implements FileRepository {
     return firstValueFrom(
       from(this.s3Client!.send(command)).pipe(
         map(() => {
-          return  "File deleted";
+          console.log("File Deleted");
+          return 'File deleted';
         })
       )
     );

@@ -8,11 +8,6 @@ import { CreateCoverageDto } from '../../domain/dtos/coverages/create-coverage.d
 import { UploadFileDto } from '../../domain/dtos/files/upload-file.dto';
 import { StatusAction } from '../enums/Status.enum';
 
-// public readonly coverageId: number,
-//     public readonly serviceId: number,
-//     public readonly title: string,
-//     public readonly description: string,
-//     public readonly files: string[],
 
 @Injectable({
   providedIn: 'root',

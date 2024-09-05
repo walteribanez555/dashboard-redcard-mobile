@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { DiscountRepository } from '../../repositories/discount.repository';
 import { UpdateDiscountDto } from '../../dtos';
-import { DiscountEntity } from '../../entities/discount.entity';
 import { FileRepository } from '../../repositories/file.repository';
 
 export interface UpdateDiscountUseCase {
-  execute(dto: UpdateDiscountDto): Promise<DiscountEntity>;
+  execute(dto: UpdateDiscountDto): Promise<any>;
 }
 
 @Injectable({
@@ -13,17 +12,22 @@ export interface UpdateDiscountUseCase {
 })
 export class UpdateDiscountService implements UpdateDiscountUseCase {
   constructor(private repository: DiscountRepository, private fileRepository : FileRepository) {}
-  async execute(dto: UpdateDiscountDto): Promise<DiscountEntity> {
+  async execute(dto: UpdateDiscountDto): Promise<any> {
     const previousFiles = dto.previousFiles.map( file => file.split('/').pop()!);
+
 
 
     await Promise.all(
       previousFiles.map( file => this.fileRepository.delete(file))
     );
 
+    console.log({dto});
+
     const filesUrl = await this.fileRepository.upload(dto.files);
 
     dto.files = filesUrl;
+
+    console.log(dto);
 
 
     return this.repository.updateDiscount(dto);

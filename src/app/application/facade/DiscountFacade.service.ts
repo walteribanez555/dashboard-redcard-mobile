@@ -65,12 +65,26 @@ export class DiscountFacadeService {
     if (!images) throw new Error('Images is required');
     if (!previousFiles) throw new Error('PreviousFiles is required');
 
-    const intentCreation = UpdateDiscountDto.create(props);
+    const uploadFileDto : UploadFileDto[] = images.map( (file: File) => {
+      return new UploadFileDto(file, file.name);
+    })
+
+
+    const updatedProps = {
+      ...props,
+      images: uploadFileDto,
+    };
+
+    const intentCreation = UpdateDiscountDto.create(updatedProps);
     if (intentCreation[0]) throw new Error(intentCreation[0] as string);
 
     this._store.dispatch(
       new DiscountActions.Update(intentCreation[1] as UpdateDiscountDto)
     );
+  }
+
+  deleteItem( entity : DiscountEntity) {
+    this._store.dispatch(new DiscountActions.Delete(entity.discount_id, entity.imagesUrl));
   }
 
 }

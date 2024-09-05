@@ -69,6 +69,8 @@ export class DiscountState {
         d.discount_id=== action.dto.discount_id ? updatedDiscount : d
       );
     ctx.patchState({ discounts, status: StatusAction.SUCCESS });
+
+    this.setInitialState(ctx);
   }
 
   @Action(DiscountActions.Create)
@@ -82,6 +84,8 @@ export class DiscountState {
       discounts: [...ctx.getState().discounts, discount],
       status: StatusAction.SUCCESS,
     });
+
+    this.setInitialState(ctx);
   }
 
   @Action(DiscountActions.Delete)

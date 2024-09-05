@@ -65,7 +65,6 @@ export class ApiDiscountsService implements DiscountRepository {
     return firstValueFrom(this._http.delete(`${this._apiUrl}?id=${id}`));
   }
 
-
   getDiscount(id: number): Promise<DiscountEntity[]> {
     return firstValueFrom(
       this._http.get<DiscountResponse[]>(this._apiUrl + '?id=' + id).pipe(
@@ -88,6 +87,7 @@ export class ApiDiscountsService implements DiscountRepository {
     return firstValueFrom(
       this._http.get<DiscountResponse[]>(this._apiUrl).pipe(
         map((resp) => {
+          console.log(resp);
           return resp.map((discount) => {
             return new DiscountEntity(
               discount.id ? discount.id : discount.discount_id!,
@@ -103,19 +103,31 @@ export class ApiDiscountsService implements DiscountRepository {
     );
   }
 
-  updateDiscount(dto: UpdateDiscountDto): Promise<DiscountEntity> {
+  updateDiscount(dto: UpdateDiscountDto): Promise<any> {
+    const fileString: string = dto.files.map((file) => file.filename).join(',');
+    const request: DiscountRequest = {
+      discount_id: dto.discount_id,
+      title: dto.title,
+      description: dto.description,
+      amount: dto.amount,
+      type: dto.type,
+      imagesUrl: fileString.length == 0 ? 'demo' : fileString,
+    };
+
+    console.log(request);
+
     return firstValueFrom(
       this._http
-        .put<DiscountResponse>(this._apiUrl + '?id=' + dto.discount_id, dto)
+        .put<DiscountResponse>(this._apiUrl + '?id=' + dto.discount_id, request)
         .pipe(
-          map((resp) => {
+          map(() => {
             return new DiscountEntity(
-              resp.id ? resp.id : resp.discount_id!,
-              resp.title,
-              resp.description,
-              resp.amount,
-              resp.type,
-              resp.imagesUrl.split(',')
+              dto.discount_id,
+              dto.title,
+              dto.description,
+              dto.amount,
+              dto.type,
+              dto.files.map((file) => file.filename)
             );
           })
         )

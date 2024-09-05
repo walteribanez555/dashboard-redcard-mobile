@@ -7,5 +7,5 @@ export abstract class DiscountRepository {
   abstract deleteDiscount(id : number): Promise<any>;
   abstract getDiscount(id : number): Promise<DiscountEntity[]>;
   abstract getDiscounts(): Promise<DiscountEntity[]>;
-  abstract updateDiscount(dto : UpdateDiscountDto) : Promise<DiscountEntity>;
+  abstract updateDiscount(dto : UpdateDiscountDto) : Promise<any>;
 }
